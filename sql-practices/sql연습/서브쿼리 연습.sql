@@ -124,6 +124,12 @@ select a.first_name, b.salary
                                    and salary >= 50000)
 order by b.salary asc;
 
+select * from employees;
+
+select * from salaries
+where to_date = '9999-01-01'
+and salary >= 50000;
+
 -- 실습문제4: 현재, 각 부서별로 최고 월급을 받은 직원의 부서이름, 이름 그리고 월급을 출력하세요.
 -- 총무 둘리 1000
 -- 개발 마이콜 2000
