@@ -90,39 +90,21 @@ having avg_salary = (select max(avg_salary) from
     
 -- 문제7.
 -- 평균 연봉이 가장 높은 직책?
-select a.title, avg(b.salary)
-from titles a, salaries b
-where a.emp_no = b.emp_no
-and a.to_date = '9999-01-01'
-and b.to_date = '9999-01-01'
-group by a.title
-having avg(b.salary)
-order by avg(b.salary) ;
-
-SELECT 
-    c.title, ROUND(AVG(b.salary)) AS avg_salary
-FROM
-    employees a,
-    salaries b,
-    titles c
-WHERE
-    a.emp_no = b.emp_no
-        AND a.emp_no = c.emp_no
-        AND b.to_date = '9999-01-01'
-        AND c.to_date = '9999-01-01'
+SELECT c.title, ROUND(AVG(b.salary)) AS avg_salary
+FROM employees a, salaries b, titles c
+WHERE a.emp_no = b.emp_no 
+AND a.emp_no = c.emp_no        
+AND b.to_date = '9999-01-01'
+AND c.to_date = '9999-01-01'
 GROUP BY c.title
-HAVING avg_salary = (SELECT 
-        MAX(avg_salary)
-    FROM
-        (SELECT 
-            ROUND(AVG(b.salary)) AS avg_salary
-        FROM
-            employees a, salaries b, titles c
+HAVING avg_salary = (SELECT MAX(avg_salary) FROM
+        (SELECT ROUND(AVG(b.salary)) AS avg_salary
+        FROM employees a, salaries b, titles c
         WHERE
-            a.emp_no = b.emp_no
-                AND a.emp_no = c.emp_no
-                AND b.to_date = '9999-01-01'
-                AND c.to_date = '9999-01-01'
+		a.emp_no = b.emp_no
+		AND a.emp_no = c.emp_no
+		AND b.to_date = '9999-01-01'
+		AND c.to_date = '9999-01-01'
         GROUP BY c.title) a);
 
 -- 문제8.
