@@ -63,7 +63,7 @@ public class BookDaoTest {
 		int count = testFindAll();
 		if (count == 10) {
 			System.out.println("성공");
-//			new BookDao().delete();
+			new BookDao().delete();
 		} else {
 			System.out.println("실패");
 		}

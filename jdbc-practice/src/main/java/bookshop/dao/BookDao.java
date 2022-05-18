@@ -13,7 +13,6 @@ import bookshop.vo.BookVo;
 public class BookDao {
 
 	public void insert(BookVo vo) {
-		boolean result = false;
 		Connection connection = null;
 		PreparedStatement pstmt = null;
 
@@ -35,9 +34,7 @@ public class BookDao {
 			pstmt.setLong(3, vo.getAuthorNo());
 
 			// 4. SQL 실행
-			int count = pstmt.executeUpdate();
-
-			result = count == 1;
+			pstmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
 			System.out.println("드라이버 로딩 실패:" + e);
 		} catch (SQLException e) {
@@ -119,4 +116,41 @@ public class BookDao {
 		return result;
 	}
 
+	public void delete() {
+		Connection connection = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			// 1. JDBC Driver 로딩 (JDBC Class 로딩: class loader)
+			Class.forName("org.mariadb.jdbc.Driver");
+
+			// 2. 연결하기
+			String url = "jdbc:mysql://192.168.10.51:3306/webdb?charset=utf8";
+			connection = DriverManager.getConnection(url, "webdb", "webdb");
+
+			// 3. SQL 준비
+			String sql = "delete from book";
+			pstmt = connection.prepareStatement(sql);
+
+			// 4. Parameter Mapping
+
+			// 5. SQL 실행
+			pstmt.executeUpdate();
+		} catch (ClassNotFoundException e) {
+			System.out.println("드라이버 로딩 실패:" + e);
+		} catch (SQLException e) {
+			System.out.println("드라이버 로딩 실패:" + e);
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (connection != null)
+					connection.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }
