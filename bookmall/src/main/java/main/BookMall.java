@@ -22,7 +22,6 @@ public class BookMall {
 //		insertMember();
 //		insertBookOrder();
 //		insertBook();
-
 		
 		// print
 		printMember();
