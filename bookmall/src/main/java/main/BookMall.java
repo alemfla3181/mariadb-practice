@@ -23,6 +23,7 @@ public class BookMall {
 //		insertBookOrder();
 //		insertBook();
 		
+		
 		// print
 		printMember();
 		printCategory();
