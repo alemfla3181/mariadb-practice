@@ -103,7 +103,7 @@ public class BookMall {
 	}
 
 	private static void insertBookOrder() {
-		// insert OrderBook
+		// insert OrderBookDTKDZ
 		OrderBookDao dao = new OrderBookDao();
 		OrderBookVo vo = new OrderBookVo();
 
@@ -112,5 +112,4 @@ public class BookMall {
 		vo.setAmount("5");
 		dao.insert(vo);
 	}
-
 }

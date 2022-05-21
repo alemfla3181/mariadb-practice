@@ -5,6 +5,16 @@ public class OrderVo {
 	private String payment;
 	private String address;
 	private String member;
+	private String date;
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
 	private Long member_no;
 	private String email;
 
@@ -58,6 +68,6 @@ public class OrderVo {
 
 	@Override
 	public String toString() {
-		return member + "(" + email + ") " + payment + ", " + address;
+		return date + " " + member + "(" + email + ") " + payment + ", " + address;
 	}
 }

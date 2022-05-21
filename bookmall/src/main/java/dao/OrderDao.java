@@ -19,7 +19,7 @@ public class OrderDao {
 		try {
 			connection = getConnection();
 
-			String sql = "insert into orders values(null, ?, ?, ?)";
+			String sql = "insert into orders(no, payment, address, member_no) values(null, ?, ?, ?)";
 			pstmt = connection.prepareStatement(sql);
 
 			pstmt.setString(1, vo.getPayment());
@@ -134,7 +134,7 @@ public class OrderDao {
 			connection = getConnection();
 
 			// 3. SQL 준비
-			String sql = "select a.no, a.payment, a.address, b.no, b.name, b.email from orders a, member b where a.member_no = b.no";
+			String sql = "select a.no, date_format(a.date, \"%Y년 %m월 %d일\"), a.payment, a.address, b.no, b.name, b.email from orders a, member b where a.member_no = b.no";
 			pstmt = connection.prepareStatement(sql);
 
 			// 4. Parameter Mapping
@@ -145,14 +145,16 @@ public class OrderDao {
 			// 6. 결과 처리
 			while (rs.next()) {
 				Long no = rs.getLong(1);
-				String payment = rs.getString(2);
-				String address = rs.getString(3);
-				Long member_no = rs.getLong(4);
-				String member = rs.getString(5);
-				String email = rs.getString(6);
+				String date = rs.getString(2);
+				String payment = rs.getString(3);
+				String address = rs.getString(4);
+				Long member_no = rs.getLong(5);
+				String member = rs.getString(6);
+				String email = rs.getString(7);
 
 				OrderVo vo = new OrderVo();
 				vo.setNo(no);
+				vo.setDate(date);
 				vo.setPayment(payment);
 				vo.setAddress(address);
 				vo.setMember_no(member_no);
